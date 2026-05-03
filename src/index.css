@@ -1,0 +1,172 @@
+/* ===== Nunito Font ===== */
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/Nunito-Variable.ttf') format('truetype');
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
+/* ===== Neumorphic Global Design System ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neu-bg: #e0e5ec;
+  --neu-dark: #b8bec7;
+  --neu-light: #ffffff;
+  --neu-accent: #00bfa6;
+  --neu-accent2: #6c5ce7;
+  --neu-text: #2d3436;
+  --neu-text-sec: #636e72;
+  --neu-text-muted: #b2bec3;
+  --neu-raised: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+  --neu-flat: 3px 3px 6px var(--neu-dark), -3px -3px 6px var(--neu-light);
+  --neu-pressed: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+  --font: 'Nunito', -apple-system, system-ui, sans-serif;
+  --font-display: 'Nunito', -apple-system, system-ui, sans-serif;
+
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--neu-text);
+  background: var(--neu-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--neu-bg);
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Dot grid pattern */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, var(--neu-dark) 0.8px, transparent 0.8px);
+  background-size: 32px 32px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Animated Background Canvas ===== */
+.animated-bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Floating Background Orbs ===== */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+}
+
+.bg-orb--1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--neu-accent) 0%, rgba(0, 191, 166, 0.3) 60%, transparent 80%);
+  top: -150px;
+  right: -100px;
+  animation: orbDrift1 22s ease-in-out infinite;
+}
+
+.bg-orb--2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #6c5ce7 0%, rgba(108, 92, 231, 0.3) 60%, transparent 80%);
+  bottom: 20%;
+  left: -150px;
+  animation: orbDrift2 28s ease-in-out infinite;
+}
+
+.bg-orb--3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #ec4899 0%, rgba(236, 72, 153, 0.3) 60%, transparent 80%);
+  top: 40%;
+  right: -100px;
+  animation: orbDrift3 25s ease-in-out infinite;
+}
+
+.bg-orb--4 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #f59e0b 0%, rgba(245, 158, 11, 0.3) 60%, transparent 80%);
+  bottom: -100px;
+  left: 30%;
+  animation: orbDrift4 20s ease-in-out infinite;
+}
+
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.10; }
+  25% { transform: translate(-40px, 60px) scale(1.08); opacity: 0.14; }
+  50% { transform: translate(-60px, 80px) scale(1.15); opacity: 0.10; }
+  75% { transform: translate(20px, 20px) scale(0.95); opacity: 0.12; }
+}
+
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.10; }
+  33% { transform: translate(50px, -40px) scale(1.05); opacity: 0.13; }
+  66% { transform: translate(80px, -60px) scale(1.1); opacity: 0.09; }
+}
+
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.10; }
+  25% { transform: translate(-30px, 30px) scale(1.1); opacity: 0.13; }
+  50% { transform: translate(-50px, 50px) scale(1.2); opacity: 0.08; }
+  75% { transform: translate(10px, -40px) scale(0.9); opacity: 0.12; }
+}
+
+@keyframes orbDrift4 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.10; }
+  50% { transform: translate(-40px, -50px) scale(1.15); opacity: 0.14; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--neu-bg); }
+::-webkit-scrollbar-thumb { background: var(--neu-accent); border-radius: 3px; }
+
+::selection {
+  background: rgba(0, 191, 166, 0.2);
+  color: var(--neu-text);
+}
