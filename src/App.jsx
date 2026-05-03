@@ -1,26 +1,27 @@
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import AnimatedBackground from './components/AnimatedBackground'
 import './App.css'
 
 /* ───────── Animation variants ───────── */
+const smoothEase = [0.22, 1, 0.36, 1]
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: smoothEase } },
 }
 const slideL = {
-  hidden: { opacity: 0, x: -80 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: smoothEase } },
 }
 const slideR = {
-  hidden: { opacity: 0, x: 80 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: smoothEase } },
 }
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.85, rotateX: 8 },
-  visible: { opacity: 1, scale: 1, rotateX: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, scale: 0.9, rotateX: 4 },
+  visible: { opacity: 1, scale: 1, rotateX: 0, transition: { duration: 0.9, ease: smoothEase } },
 }
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }
 
 /* ───────── Animated wrapper ───────── */
 function Anim({ children, v = fadeUp, className = '' }) {
@@ -58,10 +59,10 @@ function Phone({ src, alt, index = 0 }) {
     offset: ['start end', 'end start'],
   })
   // Each phone moves at a slightly different speed for depth
-  const yOffset = 30 + (index % 3) * 20
+  const yOffset = 20 + (index % 3) * 12
   const y = useTransform(scrollYProgress, [0, 1], [yOffset, -yOffset])
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [3, 0, -3])
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.95])
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [2, 0, -2])
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.97])
 
   return (
     <motion.div
@@ -165,9 +166,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* Animated canvas background */}
-      <AnimatedBackground />
-
       {/* Background orbs */}
       <div className="bg-orbs">
         <div className="bg-orb bg-orb--1" />
@@ -183,7 +181,7 @@ function App() {
       <nav className="navbar" id="nav">
         <div className="navbar__logo">
           <span className="navbar__logo-icon">S</span>
-          <span className="navbar__logo-text">FitTracker</span>
+          <span className="navbar__logo-text">System</span>
         </div>
         <ul className="navbar__links">
           {NAV_LINKS.map(l => (
@@ -211,7 +209,7 @@ function App() {
         <motion.h1 className="hero__title"
           initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}>
+          transition={{ duration: 1, delay: 0.4, ease: smoothEase }}>
           Track. Train.{' '}
           <span className="hero__title-accent">Transform.</span>
         </motion.h1>

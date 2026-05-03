@@ -7,6 +7,10 @@
 }
 
 /* ===== Neumorphic Global Design System ===== */
+html {
+  scroll-behavior: smooth;
+}
+
 *,
 *::before,
 *::after {
@@ -75,16 +79,6 @@ body::after {
   z-index: 1;
 }
 
-/* ===== Animated Background Canvas ===== */
-.animated-bg-canvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-
 /* ===== Floating Background Orbs ===== */
 .bg-orbs {
   position: fixed;
@@ -99,6 +93,8 @@ body::after {
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.12;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .bg-orb--1 {
@@ -164,7 +160,14 @@ body::after {
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--neu-bg); }
-::-webkit-scrollbar-thumb { background: var(--neu-accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb {
+  background: var(--neu-accent);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #009e8a;
+}
 
 ::selection {
   background: rgba(0, 191, 166, 0.2);
