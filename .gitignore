@@ -34,9 +34,6 @@ lerna-debug.log*
 Thumbs.db
 desktop.ini
 
-# Original source assets (already copied to public/ and src/assets/)
-nunito/
-images/
 
 # Unused component files from earlier iterations
 src/components/
